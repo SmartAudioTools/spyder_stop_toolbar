@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spyder-stop-toolbar"
+version = "1.0.0"
+description = "Barre d'outils Spyder « Stop » : un bouton qui arrete tout (execution, debogage, profilage, analyse)"
+requires-python = ">=3.9"
+dependencies = ["qtpy", "qtawesome"]
+
+# Spyder decouvre les greffons tiers par ce groupe de points d'entree. Le nom du point
+# d'entree DOIT etre identique a l'attribut NAME de la classe : Spyder leve une
+# SpyderAPIError et ignore le greffon si les deux different
+# (spyder/app/find_plugins.py, find_external_plugins).
+[project.entry-points."spyder.plugins"]
+smartos_stop = "spyder_stop_toolbar.spyder.plugin:StopToolbar"
+
+[tool.setuptools.packages.find]
+include = ["spyder_stop_toolbar*"]
